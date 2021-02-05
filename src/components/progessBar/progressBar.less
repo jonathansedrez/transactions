@@ -1,0 +1,84 @@
+@import '../../layout/variables.less';
+
+.progress-bar-wrapper {
+  margin-bottom: 24px;
+}
+
+.progress-bar {
+  width: calc(100% - 80px);
+  transform: translate(40px);
+  height: 4px;
+  background: @primary;
+  border-radius: 24px;
+  margin-bottom: 24px;
+  position: relative;
+  background: @primary-lighter;
+}
+
+.--created {
+  &::before {
+    .progress-ball-mixin();
+    background: @primary;
+    left: 0%;
+  }
+}
+
+.--processing {
+  &::before {
+    .progress-ball-mixin();
+    background: @yellow;
+    left: 50%;
+    z-index: 1;
+  }
+
+  &::after {
+    .progress-bar-mixin();
+    width: 50%;
+    background: @yellow;
+  }
+}
+
+.--processed {
+  &::before {
+    .progress-ball-mixin();
+    background: @green;
+    left: 100%;
+  }
+
+  &::after {
+    .progress-bar-mixin();
+    width: 100%;
+    background: @green;
+  }
+}
+
+.progress-text-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress-text {
+  color: @font;
+}
+
+.--active {
+  font-weight: 500 !important;
+}
+
+.progress-bar-mixin {
+  content: '';
+  position: absolute;
+  border-radius: 24px;
+  height: 4px;
+  left: 0;
+  top: 0;
+}
+
+.progress-ball-mixin {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-16px, -10px);
+  width: 24px;
+  height: 24px;
+}

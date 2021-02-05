@@ -7,9 +7,8 @@ import {
 } from '../../api/transactions.types';
 import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 import { ReactComponent as FilterIcon } from '../../assets/filter.svg';
-import { Modal } from '../../components';
+import { Modal, Loader, ProgressBar } from '../../components';
 import './transactions.less';
-import Loader from '../../components/loader/loader';
 
 type ListProps = {
   data: AgregatedTransaction[];
@@ -60,24 +59,20 @@ const Details: React.FC<DetailsProps> = (props) => {
 
   return (
     <Modal title={transaction?.title} isVisible={isVisible} onClose={onClose}>
-      <div className="transaction-modal">
-        <p>{transaction?.status}</p>
+      <div className="details">
+        <ProgressBar status={transaction?.status} />
         <div>
-          <p className="transaction-modal-title">Transferido de</p>
-          <span className="transaction-modal-values">
+          <p className="details-title">Transferido de</p>
+          <span className="details-values">
             <p>{transaction?.from}</p>
-            <p className="transaction-modal-values-amount">
-              {transaction?.amount}
-            </p>
+            <p className="details-values-amount">{transaction?.amount}</p>
           </span>
         </div>
         <div>
-          <p className="transaction-modal-title">Para</p>
-          <span className="transaction-modal-values">
+          <p className="details-title">Para</p>
+          <span className="details-values">
             <p>{transaction?.to}</p>
-            <p className="transaction-modal-values-amount">
-              {transaction?.amount}
-            </p>
+            <p className="details-values-amount">{transaction?.amount}</p>
           </span>
         </div>
       </div>
