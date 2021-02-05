@@ -50,12 +50,12 @@ const List: React.FC<ListProps> = (props) => {
   );
 };
 
-type TransactionModalProps = {
+type DetailsProps = {
   transaction?: Transaction;
   isVisible: boolean;
   onClose(): void;
 };
-const TransactionModal: React.FC<TransactionModalProps> = (props) => {
+const Details: React.FC<DetailsProps> = (props) => {
   const { transaction, isVisible, onClose } = props;
 
   return (
@@ -126,7 +126,7 @@ export const Transactions = () => {
           />
         )}
       </div>
-      <TransactionModal
+      <Details
         transaction={currentTransaction}
         isVisible={currentTransaction ? true : false}
         onClose={() => setCurrentTransaction(undefined)}
