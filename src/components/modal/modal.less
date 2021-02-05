@@ -1,3 +1,5 @@
+@import '../../layout/variables.less';
+
 .modal-overlay {
   width: 100vw;
   height: 100vh;
@@ -5,7 +7,6 @@
   align-items: center;
   justify-content: center;
   position: fixed;
-  outline: none;
   top: 0;
   background: rgba(0, 0, 0, 0.3);
   border: none;
@@ -28,8 +29,31 @@
 }
 
 .modal-title {
-  font-size: 26px;
+  font-size: 32px;
   text-align: left;
   font-weight: 700;
   margin-bottom: 24px;
+}
+
+.modal-button {
+  width: 124px;
+  height: 48px;
+  background: @primary;
+  color: @white;
+  border-radius: 32px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: @primary-darker;
+    transition: 0.2s;
+  }
+}
+
+.modal-close-icon {
+  position: absolute;
+  // background: red;
+  right: 8px;
+  top: 4px;
+  cursor: pointer;
 }

@@ -1,14 +1,20 @@
 import React, { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 
+import { ReactComponent as CloseIcon } from '../../assets/close.svg';
 import './modal.less';
 
-export interface ButtonWrapperProps {
+export interface ButtonProps {
   children: ReactNode;
+  onClick(): void;
 }
-export const ButtonWrapper = (props: ButtonWrapperProps) => {
-  const { children } = props;
-  return <button>{children}</button>;
+export const Button = (props: ButtonProps) => {
+  const { children, onClick } = props;
+  return (
+    <button className="modal-button" onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 export interface ModalProps {
@@ -21,21 +27,22 @@ export const Modal = (props: ModalProps) => {
   const { children, title, onClose, isVisible } = props;
 
   return (
-    <React.Fragment>
+    <>
       {isVisible &&
         ReactDOM.createPortal(
-          <div className="modal-overlay" onClick={onClose}>
+          <div className="modal-overlay">
             <div className="modal-card">
+              <CloseIcon className="modal-close-icon" onClick={onClose} />
               {title && <h2 className="modal-title">{title}</h2>}
               {children}
             </div>
           </div>,
           document.body
         )}
-    </React.Fragment>
+    </>
   );
 };
 
-Modal.ButtonWrapper = ButtonWrapper;
+Modal.Button = Button;
 
 export default Modal;

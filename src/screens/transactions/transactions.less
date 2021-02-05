@@ -1,9 +1,4 @@
-@primary: #5c3bfe;
-@primary-lighter: #edf1ff;
-@black: #404059;
-@white: #ffffff;
-@background: #dcdce0;
-@font: #6c6c80;
+@import '../../layout/variables.less';
 
 li {
   list-style: none;
@@ -96,5 +91,23 @@ table {
     vertical-align: middle;
     padding: 0 8px;
     line-height: 20px;
+  }
+}
+
+.transaction-modal {
+  .transaction-modal-title {
+    font-size: 26px;
+    font-weight: 500;
+    border-bottom: 1px solid @black;
+    padding-bottom: 8px;
+  }
+
+  .transaction-modal-values {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .transaction-modal-values-amount {
+    font-weight: 500;
   }
 }

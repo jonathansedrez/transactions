@@ -1,0 +1,19 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 55px);
+
+  .loading-icon {
+    width: 64px;
+    height: 64px;
+    animation: rotate 3s linear infinite;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
