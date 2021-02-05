@@ -1,0 +1,30 @@
+@import '../../layout/variables.less';
+
+.status {
+  font-size: 11px;
+  width: 120px;
+  color: @white;
+  padding: 4px;
+  border-radius: 16px;
+  text-align: center;
+  width: auto;
+
+  .status--created {
+    background: @primary;
+    width: 120px;
+    border-radius: 24px;
+  }
+
+  .status--processing {
+    background: @yellow;
+    width: 120px;
+    border-radius: 24px;
+    color: @font;
+  }
+
+  .status--processed {
+    background: @green;
+    width: 120px;
+    border-radius: 24px;
+  }
+}

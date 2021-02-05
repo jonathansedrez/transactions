@@ -67,11 +67,26 @@ table {
 
   .agregated-list__title {
     font-weight: bolder;
-    color: @black;
+    color: @darker;
     padding-bottom: 8px;
     border-bottom: 1px solid @background;
     margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .agregated-list__description {
+    width: 50% !important;
+  }
+
+  .agregated-list__status {
+    display: flex;
+    align-self: center;
+  }
+
+  .agregated-list__amount {
     font-weight: 500;
+    text-align: end;
   }
 
   .agregated-list__transaction {
@@ -96,11 +111,11 @@ table {
 
 .details {
   .details-title {
-    font-size: 22px;
+    font-size: 28px;
     font-weight: 500;
     border-bottom: 1px solid @primary-lighter;
     padding-bottom: 8px;
-    color: @font;
+    color: @background;
   }
 
   .details-values {

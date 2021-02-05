@@ -35,7 +35,7 @@ export const ProgressBar = (props: ProgressBarProps) => {
                 status === 'processed' && '--active',
               ].join(' ')}
             >
-              Concluída
+              Concluído
             </p>
           </div>
         </div>

@@ -7,7 +7,8 @@ import {
 } from '../../api/transactions.types';
 import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 import { ReactComponent as FilterIcon } from '../../assets/filter.svg';
-import { Modal, Loader, ProgressBar } from '../../components';
+import { Modal, Loader, ProgressBar, Status } from '../../components';
+import { parseDate, parseAmount } from '../../utils';
 import './transactions.less';
 
 type ListProps = {
@@ -21,27 +22,30 @@ const List: React.FC<ListProps> = (props) => {
     <ul className="agregated-list-wrapper">
       {data.map(({ date, transactions }) => (
         <li key={date} className="agregated-list">
-          <p className="agregated-list__title">{date}</p>
+          <p className="agregated-list__title">{parseDate(date)}</p>
           <table>
-            {transactions.map((transaction) => (
-              <tr
-                className="agregated-list__transaction"
-                onClick={() => handleSelect(transaction)}
-              >
-                <td className="agregated-list__text">
-                  <p>{transaction.title}</p>
-                </td>
-                <td className="agregated-list__text">
-                  <p>{transaction.description}</p>
-                </td>
-                <td className="agregated-list__text">
-                  <p>{transaction.status}</p>
-                </td>
-                <td className="agregated-list__text">
-                  <p>{transaction.amount}</p>
-                </td>
-              </tr>
-            ))}
+            <tbody>
+              {transactions.map((transaction) => (
+                <tr
+                  key={transaction.id}
+                  className="agregated-list__transaction"
+                  onClick={() => handleSelect(transaction)}
+                >
+                  <td className="agregated-list__text">
+                    <p>{transaction.title}</p>
+                  </td>
+                  <td className="agregated-list__text agregated-list__description">
+                    <p>{transaction.description}</p>
+                  </td>
+                  <td className="agregated-list__text agregated-list__status">
+                    <Status status={transaction.status} />
+                  </td>
+                  <td className="agregated-list__text agregated-list__amount">
+                    <p>{parseAmount(transaction.amount)}</p>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </li>
       ))}
@@ -65,14 +69,18 @@ const Details: React.FC<DetailsProps> = (props) => {
           <p className="details-title">Transferido de</p>
           <span className="details-values">
             <p>{transaction?.from}</p>
-            <p className="details-values-amount">{transaction?.amount}</p>
+            <p className="details-values-amount">
+              {parseAmount(transaction?.amount || 0)}
+            </p>
           </span>
         </div>
         <div>
           <p className="details-title">Para</p>
           <span className="details-values">
             <p>{transaction?.to}</p>
-            <p className="details-values-amount">{transaction?.amount}</p>
+            <p className="details-values-amount">
+              {parseAmount(transaction?.amount || 0)}
+            </p>
           </span>
         </div>
       </div>
