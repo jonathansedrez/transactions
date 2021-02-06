@@ -4,10 +4,17 @@ import { findAll } from '../../api/transactions';
 import {
   AgregatedTransaction,
   Transaction,
+  Status,
 } from '../../api/transactions.types';
 import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 import { ReactComponent as FilterIcon } from '../../assets/filter.svg';
-import { Modal, Loader, ProgressBar, Status } from '../../components';
+import {
+  Modal,
+  Loader,
+  ProgressBar,
+  StatusTag,
+  Dropdown,
+} from '../../components';
 import { parseDate, parseAmount } from '../../utils';
 import './transactions.less';
 
@@ -38,7 +45,7 @@ const List: React.FC<ListProps> = (props) => {
                     <p>{transaction.description}</p>
                   </td>
                   <td className="agregated-list__text agregated-list__status">
-                    <Status status={transaction.status} />
+                    <StatusTag status={transaction.status} />
                   </td>
                   <td className="agregated-list__text agregated-list__amount">
                     <p>{parseAmount(transaction.amount)}</p>
@@ -91,7 +98,10 @@ const Details: React.FC<DetailsProps> = (props) => {
 export const Transactions = () => {
   const [transactions, setTransactions] = useState<AgregatedTransaction[]>();
   const [isLoading, setLoading] = useState(false);
+  const [isFitlerActive, setFilterActive] = useState(false);
   const [erroModal, setErrorModal] = useState(false);
+  const [currentStatus, setCurrentStatus] = useState<Status>();
+
   const [currentTransaction, setCurrentTransaction] = useState<
     Transaction | undefined
   >();
@@ -114,11 +124,30 @@ export const Transactions = () => {
   return (
     <>
       <div className="filter">
-        <SearchIcon className="filter-icon" />
+        <SearchIcon className="filter-search-icon" />
         <input className="filter-input" placeholder="ex: Depósito" />
-        <button className="filter-button">
-          <FilterIcon className="filter-button-icon" />
-        </button>
+        <div
+          className={['filter-button', isFitlerActive && 'filter--active'].join(
+            ' '
+          )}
+        >
+          <button
+            className="filter-button-icon"
+            onClick={() => {
+              setFilterActive((isActive) => !isActive);
+            }}
+          >
+            <FilterIcon />
+          </button>
+          <Dropdown
+            onClick={(value) => setCurrentStatus(value as Status)}
+            data={[
+              { key: 'created', value: 'Solicitado' },
+              { key: 'processed', value: 'Concluído' },
+              { key: 'processing', value: 'Processando' },
+            ]}
+          />
+        </div>
       </div>
       <div className="wrapper">
         <Loader isVisible={isLoading} />

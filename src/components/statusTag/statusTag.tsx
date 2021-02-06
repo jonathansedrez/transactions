@@ -1,4 +1,4 @@
-import './status.less';
+import './statusTag.less';
 import { Status as StatusType } from '../../api/transactions.types';
 
 enum StatusParsed {
@@ -10,7 +10,7 @@ enum StatusParsed {
 export interface StatusProps {
   status: StatusType;
 }
-export const Status = (props: StatusProps) => {
+export const StatusTag = (props: StatusProps) => {
   const { status } = props;
 
   return (
@@ -20,4 +20,4 @@ export const Status = (props: StatusProps) => {
   );
 };
 
-export default Status;
+export default StatusTag;

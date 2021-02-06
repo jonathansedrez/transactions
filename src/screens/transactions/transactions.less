@@ -13,34 +13,43 @@ table {
   width: calc(100% - 54px);
   border-bottom: 1px solid @primary-lighter;
   padding: 0 0 0 54px;
-}
 
-.filter-icon {
-  height: 54px;
-  width: 34px;
-}
-
-.filter-input {
-  height: 54px;
-  border: none;
-  padding: 0 8px;
-  width: calc(100% - 34px);
-  font-size: 18px;
-  color: @font;
-  outline-color: @primary;
-  outline-offset: -1px;
-
-  &::placeholder {
-    color: @background;
+  .filter-search-icon {
+    height: 54px;
+    width: 34px;
   }
-}
 
-.filter-button {
-  background: @primary;
-  width: 54px;
-  border: none;
-  outline: none;
-  cursor: pointer;
+  .filter-input {
+    height: 54px;
+    border: none;
+    padding: 0 8px;
+    width: calc(100% - 34px);
+    font-size: 18px;
+    color: @font;
+    outline-color: @primary;
+    outline-offset: -1px;
+
+    &::placeholder {
+      color: @background;
+    }
+  }
+  .filter-button {
+    display: flex;
+    transform: translate(240px);
+    transition: 0.5s;
+  }
+
+  .filter--active {
+    transform: translate(0);
+  }
+
+  .filter-button-icon {
+    background: @primary;
+    width: 54px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
 }
 
 .wrapper {
