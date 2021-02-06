@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 import { ReactComponent as CloseIcon } from '../../assets/close.svg';
@@ -26,11 +26,21 @@ export interface ModalProps {
 export const Modal = (props: ModalProps) => {
   const { children, title, onClose, isVisible } = props;
 
+  const handleCickOutside = (e: any) => {
+    if (e.target.id === 'overlay') {
+      onClose();
+    }
+  };
+
   return (
     <>
       {isVisible &&
         ReactDOM.createPortal(
-          <div className="modal-overlay">
+          <div
+            className="modal-overlay"
+            onClick={handleCickOutside}
+            id="overlay"
+          >
             <div className="modal-card">
               <CloseIcon className="modal-close-icon" onClick={onClose} />
               {title && <h2 className="modal-title">{title}</h2>}
