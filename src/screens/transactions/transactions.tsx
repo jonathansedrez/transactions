@@ -121,6 +121,7 @@ export const Transactions = () => {
     } finally {
       setLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter?.status, debouncedTitleFilter]);
 
   useEffect(() => {
