@@ -1,4 +1,4 @@
-import { Status } from '../api/transactions.types';
+import { Status } from '../../api/transactions.types';
 
 export const filterTransaction = (
   text: string,

@@ -5,7 +5,7 @@ import {
   Transaction,
   Status,
 } from './transactions.types';
-import { filterTransaction } from '../utils/filters';
+import { filterTransaction } from '../utils/filters/filters';
 
 export const BASE_URL = 'https://warren-transactions-api.herokuapp.com/api/';
 
