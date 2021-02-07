@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { findAll } from '../../api/transactions';
 import {
@@ -106,20 +106,23 @@ export const Transactions = () => {
     Transaction | undefined
   >();
 
+  const fetchTransactions = useCallback(async () => {
+    setLoading(true);
+    try {
+      const transactions = await findAll({
+        status: currentStatus,
+      });
+      setTransactions(transactions);
+    } catch (error) {
+      setErrorModal(true);
+    } finally {
+      setLoading(false);
+    }
+  }, [currentStatus]);
+
   useEffect(() => {
-    const fetch = async () => {
-      setLoading(true);
-      try {
-        const transactions = await findAll();
-        setTransactions(transactions);
-      } catch (error) {
-        setErrorModal(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetch();
-  }, []);
+    fetchTransactions();
+  }, [fetchTransactions]);
 
   return (
     <>
@@ -142,6 +145,7 @@ export const Transactions = () => {
           <Dropdown
             onClick={(value) => setCurrentStatus(value as Status)}
             data={[
+              { key: '', value: 'Nenhum' },
               { key: 'created', value: 'Solicitado' },
               { key: 'processed', value: 'Concluído' },
               { key: 'processing', value: 'Processando' },
@@ -151,12 +155,12 @@ export const Transactions = () => {
       </div>
       <div className="wrapper">
         <Loader isVisible={isLoading} />
-        {transactions && (
+        {transactions && !isLoading ? (
           <List
             data={transactions}
             handleSelect={(transaction) => setCurrentTransaction(transaction)}
           />
-        )}
+        ) : null}
       </div>
       <Details
         transaction={currentTransaction}
