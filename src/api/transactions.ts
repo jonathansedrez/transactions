@@ -44,7 +44,7 @@ export const findAll = async (filter?: {
         const filteredTransactions = transactions.filter(
           (transaction) =>
             transaction.date === agregated.date &&
-            filterTransaction(transaction.title, filter?.title) &&
+            filterTransaction(transaction.title.toLowerCase(), filter?.title) &&
             filterTransaction(transaction.status, filter?.status)
         );
         return {

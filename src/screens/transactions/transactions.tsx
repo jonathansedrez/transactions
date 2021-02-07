@@ -8,6 +8,8 @@ import {
 } from '../../api/transactions.types';
 import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 import { ReactComponent as FilterIcon } from '../../assets/filter.svg';
+import { parseDate, parseAmount } from '../../utils';
+import { useDebounce } from '../../hook';
 import {
   Modal,
   Loader,
@@ -15,7 +17,6 @@ import {
   StatusTag,
   Dropdown,
 } from '../../components';
-import { parseDate, parseAmount } from '../../utils';
 import './transactions.less';
 
 type ListProps = {
@@ -100,17 +101,20 @@ export const Transactions = () => {
   const [isLoading, setLoading] = useState(false);
   const [isFitlerActive, setFilterActive] = useState(false);
   const [erroModal, setErrorModal] = useState(false);
-  const [currentStatus, setCurrentStatus] = useState<Status>();
-
+  const [statusFilter, setStatusFilter] = useState<Status>();
+  const [titleFilter, setTitleFilter] = useState<string>('');
   const [currentTransaction, setCurrentTransaction] = useState<
     Transaction | undefined
   >();
+
+  const debouncedTitleFilter = useDebounce(titleFilter);
 
   const fetchTransactions = useCallback(async () => {
     setLoading(true);
     try {
       const transactions = await findAll({
-        status: currentStatus,
+        status: statusFilter,
+        title: titleFilter,
       });
       setTransactions(transactions);
     } catch (error) {
@@ -118,7 +122,7 @@ export const Transactions = () => {
     } finally {
       setLoading(false);
     }
-  }, [currentStatus]);
+  }, [statusFilter, debouncedTitleFilter]);
 
   useEffect(() => {
     fetchTransactions();
@@ -128,7 +132,11 @@ export const Transactions = () => {
     <>
       <div className="filter">
         <SearchIcon className="filter-search-icon" />
-        <input className="filter-input" placeholder="ex: Depósito" />
+        <input
+          className="filter-input"
+          placeholder="ex: Depósito"
+          onChange={(e) => setTitleFilter(e.target.value)}
+        />
         <div
           className={['filter-button', isFitlerActive && 'filter--active'].join(
             ' '
@@ -143,7 +151,7 @@ export const Transactions = () => {
             <FilterIcon />
           </button>
           <Dropdown
-            onClick={(value) => setCurrentStatus(value as Status)}
+            onClick={(value) => setStatusFilter(value as Status)}
             data={[
               { key: '', value: 'Nenhum' },
               { key: 'created', value: 'Solicitado' },

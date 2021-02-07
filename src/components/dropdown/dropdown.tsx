@@ -27,6 +27,7 @@ export const Dropdown = (props: DropdownProps) => {
         className="dropdown-header"
         value={current || 'Status'}
         onClick={() => setVisible(!isVisible)}
+        readOnly
       />
       <Chevron
         className="dropdown-chevron"
