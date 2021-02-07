@@ -8,7 +8,7 @@ import {
 } from '../../api/transactions.types';
 import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 import { ReactComponent as FilterIcon } from '../../assets/filter.svg';
-import { parseDate, parseAmount } from '../../utils';
+import { parseAmount } from '../../utils';
 import { useDebounce } from '../../hook';
 import {
   Modal,
@@ -30,25 +30,25 @@ const List: React.FC<ListProps> = (props) => {
     <ul className="agregated-list-wrapper">
       {data.map(({ date, transactions }) => (
         <li key={date} className="agregated-list">
-          <p className="agregated-list__title">{parseDate(date)}</p>
+          <p className="agregated-list-title">{date}</p>
           <table>
             <tbody>
               {transactions.map((transaction) => (
                 <tr
                   key={transaction.id}
-                  className="agregated-list__transaction"
+                  className="agregated-list-transaction"
                   onClick={() => handleSelect(transaction)}
                 >
-                  <td className="agregated-list__text">
+                  <td className="agregated-list-text">
                     <p>{transaction.title}</p>
                   </td>
-                  <td className="agregated-list__text agregated-list__description">
+                  <td className="agregated-list-text agregated-list-description">
                     <p>{transaction.description}</p>
                   </td>
-                  <td className="agregated-list__text agregated-list__status">
+                  <td className="agregated-list-text agregated-list-status">
                     <StatusTag status={transaction.status} />
                   </td>
-                  <td className="agregated-list__text agregated-list__amount">
+                  <td className="agregated-list-text agregated-list-amount">
                     <p>{parseAmount(transaction.amount)}</p>
                   </td>
                 </tr>
@@ -101,20 +101,19 @@ export const Transactions = () => {
   const [isLoading, setLoading] = useState(false);
   const [isFitlerActive, setFilterActive] = useState(false);
   const [erroModal, setErrorModal] = useState(false);
-  const [statusFilter, setStatusFilter] = useState<Status>();
-  const [titleFilter, setTitleFilter] = useState<string>('');
+  const [filter, setFilters] = useState<{ title?: string; status?: Status }>();
   const [currentTransaction, setCurrentTransaction] = useState<
     Transaction | undefined
   >();
 
-  const debouncedTitleFilter = useDebounce(titleFilter);
+  const debouncedTitleFilter = useDebounce(filter?.title || '');
 
   const fetchTransactions = useCallback(async () => {
     setLoading(true);
     try {
       const transactions = await findAll({
-        status: statusFilter,
-        title: titleFilter,
+        status: filter?.status,
+        title: filter?.title,
       });
       setTransactions(transactions);
     } catch (error) {
@@ -122,7 +121,7 @@ export const Transactions = () => {
     } finally {
       setLoading(false);
     }
-  }, [statusFilter, debouncedTitleFilter]);
+  }, [filter?.status, debouncedTitleFilter]);
 
   useEffect(() => {
     fetchTransactions();
@@ -135,7 +134,12 @@ export const Transactions = () => {
         <input
           className="filter-input"
           placeholder="ex: Depósito"
-          onChange={(e) => setTitleFilter(e.target.value)}
+          onChange={(e) =>
+            setFilters((previousFilters) => ({
+              status: previousFilters?.status,
+              title: e.target.value,
+            }))
+          }
         />
         <div
           className={['filter-button', isFitlerActive && 'filter--active'].join(
@@ -151,7 +155,12 @@ export const Transactions = () => {
             <FilterIcon />
           </button>
           <Dropdown
-            onClick={(value) => setStatusFilter(value as Status)}
+            onClick={(value) =>
+              setFilters((previousFilters) => ({
+                title: previousFilters?.title,
+                status: value as Status,
+              }))
+            }
             data={[
               { key: '', value: 'Nenhum' },
               { key: 'created', value: 'Solicitado' },

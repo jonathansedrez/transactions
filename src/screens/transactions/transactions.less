@@ -52,6 +52,10 @@ table {
     border: none;
     outline: none;
     cursor: pointer;
+
+    &:hover {
+      background: @primary-darker;
+    }
   }
 }
 
@@ -77,7 +81,7 @@ table {
   color: @font;
   padding: 16px;
 
-  .agregated-list__title {
+  .agregated-list-title {
     font-weight: bolder;
     color: @darker;
     padding-bottom: 8px;
@@ -87,30 +91,30 @@ table {
     font-size: 18px;
   }
 
-  .agregated-list__description {
+  .agregated-list-description {
     width: 50% !important;
   }
 
-  .agregated-list__status {
+  .agregated-list-status {
     display: flex;
     align-self: center;
   }
 
-  .agregated-list__amount {
+  .agregated-list-amount {
     font-weight: 500;
     text-align: end;
   }
 
-  .agregated-list__transaction {
+  .agregated-list-transaction {
     margin-bottom: 2px;
     background: @white;
     cursor: pointer;
   }
-  .agregated-list__transaction:hover {
+  .agregated-list-transaction:hover {
     background: @primary-lighter;
   }
 
-  .agregated-list__text {
+  .agregated-list-text {
     width: 25%;
     height: 52px;
     align-items: center;
