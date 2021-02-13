@@ -18,7 +18,7 @@ const server = setupServer(
 beforeAll(() => server.listen());
 afterAll(() => server.close());
 
-describe('Transaction screen', () => {
+describe('[SCREEN] Transaction', () => {
   it('should list the dates separately', async () => {
     const { getByRole, findAllByRole } = render(<Transactions />);
     expect(getByRole('progressbar')).toBeInTheDocument();
