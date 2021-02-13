@@ -42,6 +42,39 @@ describe('[SCREEN] Transaction', () => {
     });
   });
 
+  it('should render empty state when the filter is not found', async () => {
+    const { findByText, findAllByRole, getByTestId } = render(<Transactions />);
+
+    expect(await findAllByRole('listitem')).toHaveLength(2);
+
+    const input = getByTestId('filter-input');
+    await act(async () => {
+      fireEvent.change(input, { target: { value: 'InvalidSeachText' } });
+    });
+
+    await waitFor(async () => {
+      expect(
+        await findByText('Nenhum resultado encontrado')
+      ).toBeInTheDocument();
+    });
+  });
+
+  it.only('should render details from transaction when click in the list item', async () => {
+    const { getByTestId, findByText } = render(<Transactions />);
+
+    server.use(
+      rest.get(`${BASE_URL}/transactions`, (req, res, ctx) => {
+        return res(ctx.json(mockWithAgregatedDates));
+      })
+    );
+
+    const transaction = await findByText('default description');
+
+    fireEvent.click(transaction);
+
+    expect(getByTestId('modal-card')).toBeInTheDocument();
+  });
+
   it('should list the dates by equal days', async () => {
     const { getByRole, findAllByRole } = render(<Transactions />);
     expect(getByRole('progressbar')).toBeInTheDocument();

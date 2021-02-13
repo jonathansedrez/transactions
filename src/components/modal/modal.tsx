@@ -41,7 +41,7 @@ export const Modal = (props: ModalProps) => {
             onClick={handleCickOutside}
             id="overlay"
           >
-            <div className="modal-card">
+            <div className="modal-card" data-testid="modal-card">
               <CloseIcon className="modal-close-icon" onClick={onClose} />
               {title && <h2 className="modal-title">{title}</h2>}
               {children}
