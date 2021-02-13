@@ -1,0 +1,38 @@
+@import '../../layout/variables.less';
+
+.empty-state-wrapper {
+  position: relative;
+  display: flex;
+  height: calc(100vh - 56px);
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &:before {
+    content: '';
+    width: 116px;
+    height: 116px;
+    border-radius: 50%;
+    background: @primary-lighter;
+    position: absolute;
+    transform: translateY(-52px);
+  }
+}
+
+.empty-state-icon {
+  width: 54px;
+  height: 54px;
+  margin-bottom: 48px;
+  z-index: 1;
+}
+
+.empty-state-title {
+  margin-bottom: 16px;
+  font-size: 24px;
+  color: @black;
+}
+
+.empty-state-subtitle {
+  color: @font;
+}

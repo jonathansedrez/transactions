@@ -16,6 +16,7 @@ import {
   ProgressBar,
   StatusTag,
   Dropdown,
+  EmptyState,
 } from '../../components';
 import './transactions.less';
 
@@ -174,6 +175,7 @@ export const Transactions = () => {
       </div>
       <div className="wrapper">
         <Loader isVisible={isLoading} />
+        {!transactions?.length && !isLoading ? <EmptyState /> : null}
         {transactions?.length && !isLoading ? (
           <List
             data={transactions}
