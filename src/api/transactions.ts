@@ -59,5 +59,7 @@ export const findAll = async (filter?: {
 
       return validTransactions;
     })
-    .catch((error) => error);
+    .catch((error) => {
+      throw Error(error);
+    });
 };

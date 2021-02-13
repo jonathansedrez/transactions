@@ -132,7 +132,8 @@
     "isolatedModules": false
   },
   "devDependencies": {
-    "less-loader": "4.1.0"
+    "less-loader": "4.1.0",
+    "msw": "^0.26.2"
   },
   "jest": {
     "roots": [

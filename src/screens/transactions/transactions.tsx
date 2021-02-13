@@ -135,10 +135,11 @@ export const Transactions = () => {
         <input
           className="filter-input"
           placeholder="ex: Depósito"
+          data-testid="filter-input"
           onChange={(e) =>
             setFilters((previousFilters) => ({
               status: previousFilters?.status,
-              title: e.target.value,
+              title: e.target.value.toLowerCase(),
             }))
           }
         />
@@ -173,7 +174,7 @@ export const Transactions = () => {
       </div>
       <div className="wrapper">
         <Loader isVisible={isLoading} />
-        {transactions && !isLoading ? (
+        {transactions?.length && !isLoading ? (
           <List
             data={transactions}
             handleSelect={(transaction) => setCurrentTransaction(transaction)}

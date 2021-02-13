@@ -10,7 +10,7 @@ export const Loader = (props: LoaderProps) => {
   return (
     <>
       {isVisible && (
-        <div className="loading">
+        <div className="loading" role="progressbar">
           <LoaderIcon className="loading-icon" />
         </div>
       )}
