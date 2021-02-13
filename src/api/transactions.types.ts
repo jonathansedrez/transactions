@@ -15,3 +15,8 @@ export interface AgregatedTransaction {
   date: string;
   transactions: Transaction[];
 }
+
+export interface Filters {
+  title?: string;
+  status?: Status;
+}
