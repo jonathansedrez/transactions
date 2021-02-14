@@ -6,17 +6,13 @@ beforeEach(() => {
 });
 
 describe('Transaction Screen', () => {
-  it('Should show loader when fetch service', () => {
-    cy.getBy('loader').should('be.visible');
-  });
-
   it('Should list transactions', () => {
     cy.wait('@transactions').its('response.body').should('have.length', 3);
   });
 
   it('Should open transaction details', () => {
     cy.get(
-      ':nth-child(1) > table > tbody > :nth-child(1) > :nth-child(1)'
+      ':nth-child(2) > table > [data-testid=agregated-list-transaction] > :nth-child(1) > :nth-child(1)'
     ).click();
     cy.getBy('modal-card').should('be.visible');
     cy.getBy('modal-close-icon').click();
