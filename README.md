@@ -26,7 +26,7 @@ Utilize o comando `yarn test` para executar todos testes unitários da aplicaç�
 
 ### Testes integração
 
-Utilize o comando `yarn test:e2e` para abrir o executável de testes de integrações gerados pelo Cypress. Selecionando o teste irá se iniciar uma bateria de testes.
+Inicialmente é necessário iniciar a aplicação em modo de desenvolvimento. Logo após utilize o comando `yarn test:e2e` para abrir o executável de testes de integrações gerados pelo Cypress. Selecionando o teste irá se iniciar uma bateria de testes.
 
 </br>
 
