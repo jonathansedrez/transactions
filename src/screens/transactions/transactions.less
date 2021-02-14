@@ -62,6 +62,7 @@ table {
 .wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
   background: @white;
   overflow: hidden;
 }
@@ -73,8 +74,41 @@ table {
   border-radius: 4px;
   background: @white;
   padding: 24px;
-  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.02),
-    0 15px 40px rgba(166, 173, 201, 0.05);
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.08),
+    0 15px 40px rgba(166, 173, 201, 0.1);
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
+.agregated-list-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  width: calc(100% - 32px);
+  transform: translateX(16px);
+
+  p {
+    color: @background;
+    line-height: 20px;
+  }
+
+  :nth-child(1) {
+    width: 30%;
+  }
+
+  :nth-child(2) {
+    width: 60%;
+  }
+
+  :nth-child(3) {
+    width: 30%;
+  }
+
+  :nth-child(4) {
+    width: 10%;
+  }
 }
 
 .agregated-list {

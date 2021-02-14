@@ -29,6 +29,12 @@ const List: React.FC<ListProps> = (props) => {
 
   return (
     <ul className="agregated-list-wrapper">
+      <div className="agregated-list-header">
+        <p>Titulo</p>
+        <p>Descrição</p>
+        <p>Status</p>
+        <p>Valor</p>
+      </div>
       {data.map(({ date, transactions }) => (
         <li key={date} className="agregated-list">
           <p className="agregated-list-title">{date}</p>
