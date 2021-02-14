@@ -25,6 +25,7 @@ export const Dropdown = (props: DropdownProps) => {
     <div className="dropdown-wrapper" ref={dropdown}>
       <input
         className="dropdown-header"
+        data-testid="dropdown"
         value={current || 'Status'}
         onClick={() => setVisible(!isVisible)}
         readOnly

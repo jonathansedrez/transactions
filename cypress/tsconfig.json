@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress"]
+  },
+  "include": [
+    "**/*.ts",
+    "support/commands.js",
+    "support/index.js",
+    "support/commands.js",
+    "integration/transactions.spec.js"
+  ]
+}

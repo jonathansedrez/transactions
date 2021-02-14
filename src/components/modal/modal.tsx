@@ -42,7 +42,11 @@ export const Modal = (props: ModalProps) => {
             id="overlay"
           >
             <div className="modal-card" data-testid="modal-card">
-              <CloseIcon className="modal-close-icon" onClick={onClose} />
+              <CloseIcon
+                className="modal-close-icon"
+                onClick={onClose}
+                data-testid="modal-close-icon"
+              />
               {title && <h2 className="modal-title">{title}</h2>}
               {children}
             </div>

@@ -33,7 +33,7 @@ const List: React.FC<ListProps> = (props) => {
         <li key={date} className="agregated-list">
           <p className="agregated-list-title">{date}</p>
           <table>
-            <tbody>
+            <tbody data-testid="agregated-list-transaction">
               {transactions.map((transaction) => (
                 <tr
                   key={transaction.id}
@@ -151,6 +151,7 @@ export const Transactions = () => {
         >
           <button
             className="filter-button-icon"
+            data-testid="filter-button-icon"
             onClick={() => {
               setFilterActive((isActive) => !isActive);
             }}
