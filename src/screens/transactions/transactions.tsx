@@ -8,7 +8,7 @@ import {
 } from '../../api/transactions.types';
 import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 import { ReactComponent as FilterIcon } from '../../assets/filter.svg';
-import { parseAmount } from '../../utils';
+import { parseAmount, parseDate } from '../../utils';
 import { useDebounce } from '../../hook';
 import {
   Modal,
@@ -37,7 +37,7 @@ const List: React.FC<ListProps> = (props) => {
       </div>
       {data.map(({ date, transactions }) => (
         <li key={date} className="agregated-list">
-          <p className="agregated-list-title">{date}</p>
+          <p className="agregated-list-title">{parseDate(date)}</p>
           <table>
             <tbody data-testid="agregated-list-transaction">
               {transactions.map((transaction) => (

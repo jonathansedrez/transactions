@@ -59,7 +59,7 @@ describe('[SCREEN] Transaction', () => {
     });
   });
 
-  it.only('should render details from transaction when click in the list item', async () => {
+  it('should render details from transaction when click in the list item', async () => {
     const { getByTestId, findByText } = render(<Transactions />);
 
     server.use(
