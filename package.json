@@ -134,6 +134,7 @@
   },
   "devDependencies": {
     "cypress": "^6.4.0",
+    "husky": "4",
     "less-loader": "4.1.0",
     "msw": "^0.26.2"
   },
@@ -188,5 +189,10 @@
       "jest-watch-typeahead/testname"
     ],
     "resetMocks": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm test"
+    }
   }
 }
