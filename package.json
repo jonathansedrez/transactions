@@ -192,7 +192,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn test:unit"
+      "pre-push": "yarn test"
     }
   }
 }
